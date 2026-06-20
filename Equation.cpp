@@ -37,12 +37,7 @@ Equation::Equation(double const &va,double const &vb,double const &vc):a{va},b{v
     }
     else{
         double delta=b*b-4*a*c;
-        // solutions=new (std::nothrow) double [ARR_SIZE];
         solutions=new double [ARR_SIZE];
-        // if(solutions==nullptr){
-        //     std::cout<<"Memory allocation failed\n";
-        //     throw std::bad_alloc();        
-        // }
         initate_arr(solutions);
         solutions_size=solut_check(a,b,delta,solutions);            
     }
@@ -51,11 +46,6 @@ Equation:: ~ Equation(){
     delete [] solutions;
 }
 Equation::Equation(Equation const &o):a{o.a},b{o.b},c{o.c},solutions{nullptr},solutions_size{o.solutions_size}{
-    // solutions=new (std::nothrow) double [ARR_SIZE];
-    // if(solutions==nullptr){
-        //     std::cout<<"Memory allocation failed\n";
-        //     throw std::bad_alloc();        
-        // }
     solutions=new double[ARR_SIZE];
     initate_arr(solutions);
     for(int i=0;i<ARR_SIZE;i++){
@@ -103,7 +93,6 @@ double Equation::get_c()const{
     return c;
 }
 Equation & Equation::set_a(double const &val){
-    //check if a is not zero
     if(val==0){        
         throw std::invalid_argument("A cant be 0\n");
     }
@@ -150,6 +139,3 @@ std::ostream & operator <<(std::ostream &out,Equation const & eq){
     out<<eq.get_a()<<" X^2 + "<<eq.get_b()<<" X + "<<eq.get_c()<<" = 0";
     return out;
 }
-// double Equation::operator [](int idx)const{
-//     return solutions[idx];
-// }
