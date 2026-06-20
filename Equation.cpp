@@ -5,12 +5,15 @@
 #include <limits>
 #include <iomanip>
 //Initiating array with nan values
-void initate_arr(double *solutions){
-    solutions[0]=std::numeric_limits<double>::quiet_NaN();
-    solutions[1]=std::numeric_limits<double>::quiet_NaN();
-}
+// void initate_arr(double *solutions){
+//     solutions[0]=std::numeric_limits<double>::quiet_NaN();
+//     solutions[1]=std::numeric_limits<double>::quiet_NaN();
+// }
+
 //Checking number of solutions and assign them
-std::size_t solut_check(double const &a,double const &b,double const &delta,double *solutions){
+std::size_t Equation::solut_check(double const &a,double const &b,double const &c){
+    double delta=b*b-4*a*c;
+
     if(delta<0){
         
         for(int i=0;i<ARR_SIZE;i++){
@@ -36,10 +39,10 @@ Equation::Equation(double const &va,double const &vb,double const &vc):a{va},b{v
     
     }
     else{
-        double delta=b*b-4*a*c;
+        // double delta=b*b-4*a*c;
         solutions=new double [ARR_SIZE];
-        initate_arr(solutions);
-        solutions_size=solut_check(a,b,delta,solutions);            
+        // initate_arr(solutions);
+        solutions_size=solut_check(a,b,c);            
     }
 }
 Equation:: ~ Equation(){
@@ -47,7 +50,7 @@ Equation:: ~ Equation(){
 }
 Equation::Equation(Equation const &o):a{o.a},b{o.b},c{o.c},solutions{nullptr},solutions_size{o.solutions_size}{
     solutions=new double[ARR_SIZE];
-    initate_arr(solutions);
+    // initate_arr(solutions);
     for(int i=0;i<ARR_SIZE;i++){
         solutions[i]=o.solutions[i];        
     }
@@ -98,22 +101,22 @@ Equation & Equation::set_a(double const &val){
     }
     else{
         a=val;
-        double delta=b*b-4*a*c;
-        solutions_size=solut_check(a,b,delta,solutions);
+        // double delta=b*b-4*a*c;
+        solutions_size=solut_check(a,b,c);
     }
     return *this;
 
 }
 Equation & Equation::set_b(double const &val){
     b=val;
-    double delta=b*b-4*a*c;
-    solutions_size=solut_check(a,b,delta,solutions);
+    // double delta=b*b-4*a*c;
+    solutions_size=solut_check(a,b,c);
     return *this;
 }
 Equation & Equation::set_c(double const &val){
     c=val;
-    double delta=b*b-4*a*c;
-    solutions_size=solut_check(a,b,delta,solutions);
+    // double delta=b*b-4*a*c;
+    solutions_size=solut_check(a,b,c);
     return *this;
 }
 std::size_t Equation::get_solutions_size() const{
